@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zentrix</title>
+  <title>Akash</title>
   <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
   <style>
     html, body {
@@ -13,19 +13,46 @@
       color: #00ffcc;
       font-family: monospace;
       overflow-x: hidden;
-    }.dot-map {
+    }/* Loading Screen */
+#loadingScreen {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  font-size: 4px;
-  line-height: 4px;
-  white-space: pre;
-  color: #005050;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.loading-text {
+  font-size: 2rem;
+  color: #00ffcc;
+  animation: glitch-text-fast 0.15s infinite;
+}
+
+@keyframes glitch-text-fast {
+  0% { color: #ff0040; }
+  33% { color: #00ffcc; }
+  66% { color: #4400ff; }
+  100% { color: #00ffcc; }
+}
+
+/* Parallax Stars */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  background: url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/img/stars.jpg');
+  background-size: cover;
   z-index: 0;
-  pointer-events: none;
-  user-select: none;
+  animation: stars 200s linear infinite;
+}
+
+@keyframes stars {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-50%, -50%); }
 }
 
 header {
@@ -40,14 +67,13 @@ header {
   font-weight: bold;
   display: inline-block;
   letter-spacing: 2px;
-  animation: glitch-text 3s infinite;
+  animation: glitch-colors 0.15s infinite;
 }
 
-@keyframes glitch-text {
-  0%, 100% { text-shadow: 0 0 2px #00ffcc; }
-  25% { text-shadow: 2px -2px #ff00cc; }
-  50% { text-shadow: -2px 2px #00ffcc; }
-  75% { text-shadow: 1px 1px #ff00cc; }
+@keyframes glitch-colors {
+  0% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
+  50% { color: #00ffcc; text-shadow: -2px 0 red, 2px 0 blue; }
+  100% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
 }
 
 .interactive-section {
@@ -65,20 +91,8 @@ header {
   border: 1px solid #00ffcc;
   cursor: pointer;
   font-family: monospace;
-  position: relative;
-  overflow: hidden;
   transition: 0.3s ease-in-out;
-}
-
-.glitch-btn span {
-  display: inline-block;
-  animation: glitch-char 2s infinite alternate;
-}
-
-@keyframes glitch-char {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(2px, -2px); }
-  100% { transform: translate(-1px, 1px); }
+  animation: glitch-colors 0.15s infinite;
 }
 
 .details-box {
@@ -101,27 +115,21 @@ header {
   font-size: 2rem;
   margin: 0 20px;
   color: #00ffcc;
-  transition: transform 0.3s;
   display: inline-block;
-}
-
-.contact a:hover {
-  transform: scale(1.2);
-}
-
-.contact i {
-  animation: glitch-char 1.5s infinite alternate;
+  animation: glitch-colors 0.15s infinite;
 }
 
   </style>
 </head><body>
-  <div class="dot-map" id="dotMap"></div>  <header>
-    <h1 class="glitch-title" id="glitchTitle">Zentrix</h1>
+  <div id="loadingScreen">
+    <div class="loading-text">Loading Akash...</div>
+  </div>  <header>
+    <h1 class="glitch-title" id="glitchTitle">Akash</h1>
   </header>  <section class="interactive-section">
     <h2>Want to know about me?</h2>
-    <button class="glitch-btn" onclick="showDetails()" id="glitchButton"></button>
+    <button class="glitch-btn" onclick="showDetails()">Click to Reveal</button>
     <div class="details-box" id="detailsBox">
-      <p><strong>Name:</strong> Zentrix</p>
+      <p><strong>Name:</strong> Akash</p>
       <p><strong>Field:</strong> Cybersecurity Student</p>
       <p><strong>Skills:</strong> C++, Cybersecurity, Editing, Reverse Engineering (basic)</p>
     </div>
@@ -133,9 +141,14 @@ header {
       <i class="fab fa-instagram"></i>
     </a>
   </section>  <script>
+    // Remove Loading Screen
+    window.addEventListener('load', () => {
+      document.getElementById('loadingScreen').style.display = 'none';
+    });
+
     // Glitching Header Letters
     const glitchTitle = document.getElementById('glitchTitle');
-    const originalText = "Zentrix";
+    const originalText = "Akash";
     const glitchChars = "@#$%&1234567890-=+!~[]{}|<>?/";
 
     setInterval(() => {
@@ -145,29 +158,10 @@ header {
       glitchTitle.textContent = glitched;
     }, 150);
 
-    // Glitch Button Characters
-    const button = document.getElementById('glitchButton');
-    const buttonText = "Click to Reveal";
-    button.innerHTML = buttonText.split('').map(letter => `<span>${letter}</span>`).join('');
-
     // Toggle Details
     function showDetails() {
       const box = document.getElementById("detailsBox");
       box.style.display = box.style.display === "block" ? "none" : "block";
     }
-
-    // Dot World Map
-    const dotMap = document.getElementById('dotMap');
-    const mapWidth = Math.floor(window.innerWidth / 4);
-    const mapHeight = Math.floor(window.innerHeight / 4);
-    let dots = '';
-    for (let y = 0; y < mapHeight; y++) {
-      for (let x = 0; x < mapWidth; x++) {
-        const isLand = Math.random() > 0.6; // change to world-map logic if needed
-        dots += isLand ? '.' : ' ';
-      }
-      dots += '\n';
-    }
-    dotMap.textContent = dots;
   </script></body>
 </html>
