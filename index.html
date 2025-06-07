@@ -1,141 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zentrix | Cybersecurity Student</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zentrix</title>
   <style>
-    :root {
-      --bg-color: #0d1117;
-      --header-bg: #161b22;
-      --text-color: #c9d1d9;
-      --accent-green: #2ecc71;
-      --card-bg: #21262d;
-    }
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-    header {
-      background: var(--header-bg);
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 1px solid #30363d;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      color: var(--accent-green);
-      animation: flicker 2s infinite alternate;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #8b949e;
-    }
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    h2 {
-      color: var(--accent-green);
-      margin-bottom: 1rem;
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.5rem;
-    }
-    .skills {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .skill {
-      background: var(--card-bg);
-      padding: 0.8rem 1.2rem;
-      border-radius: 6px;
-      color: var(--accent-green);
-      border: 1px solid #30363d;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .skill:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
-    }
-    .contact a {
-      display: block;
-      color: var(--accent-green);
-      text-decoration: none;
-      margin-bottom: 0.5rem;
-      transition: color 0.2s ease;
-    }
-    .contact a:hover {
-      color: #27ae60;
-      text-decoration: underline;
-    }
-    footer {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      padding: 1.5rem;
-      background: var(--header-bg);
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #30363d;
     }
+
+    h1.glitch {
+      font-size: 4rem;
+      font-weight: 900;
+      color: white;
+      position: relative;
+      animation: flicker 3s infinite;
+    }
+
+    h1.glitch::before,
+    h1.glitch::after {
+      content: 'Zentrix';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      color: #0ff;
+      background: #0d0d0d;
+    }
+
+    h1.glitch::before {
+      top: -2px;
+      left: 2px;
+      text-shadow: -1px 0 red;
+      animation: glitchTop 2s infinite;
+    }
+
+    h1.glitch::after {
+      top: 2px;
+      left: -2px;
+      text-shadow: -1px 0 blue;
+      animation: glitchBottom 2s infinite;
+    }
+
+    @keyframes glitchTop {
+      0%, 100% { clip-path: inset(0 0 90% 0); }
+      50% { clip-path: inset(30% 0 50% 0); }
+    }
+
+    @keyframes glitchBottom {
+      0%, 100% { clip-path: inset(90% 0 0 0); }
+      50% { clip-path: inset(50% 0 30% 0); }
+    }
+
     @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.85; }
-      100% { opacity: 1; }
+      0%, 100% { opacity: 1; }
+      10% { opacity: 0.9; }
+      20% { opacity: 0.95; }
+      30% { opacity: 0.85; }
+      40% { opacity: 1; }
     }
-    .terminal-box {
-      background: #000000;
-      color: #2ecc71;
-      font-family: monospace;
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 10px #2ecc71;
+
+    .contact {
+      margin-top: 30px;
+    }
+
+    .contact a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 2rem;
+      transition: 0.3s;
+    }
+
+    .contact a:hover {
+      color: #00ffff;
+      transform: scale(1.2);
+    }
+
+    .contact i {
+      vertical-align: middle;
+      margin-right: 8px;
     }
   </style>
+<script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <header>
-    <h1>Zentrix</h1>
-    <p>Cybersecurity Student</p>
-  </header>
+  <h1 class="glitch">Zentrix</h1>
 
-  <section>
-    <div class="terminal-box">
-      > Hello, World!<br>
-      > I’m Akash, Exploring cybersecurity, cracking binaries, and decoding everything that doesn't makes sense.<br>
-      > Curious about how that works?
-    </div>
-
-    <h2>About Me</h2>
-    <p>I’m a passionate learner diving into the world of cybersecurity, reverse engineering, and digital defense.</p>
-  </section>
-
-  <section>
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill">C++</div>
-      <div class="skill">Cybersecurity</div>
-      <div class="skill">Editing</div>
-      <div class="skill">Reverse Engineering</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Contact</h2>
-    <div class="contact">
-      <a href="mailto:elo.zentrix@gmail.com">elo.zentrix@gmail.com</a>
-      <a href="https://instagram.com/elo.zentrix" target="_blank">Instagram: @elo.zentrix</a>
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2025 Zentrix. All rights reserved.
-  </footer>
+  <div class="contact">
+    <a href="mailto:yourmail@gmail.com" target="_blank">
+      <i class="fas fa-envelope"></i> Gmail
+    </a>
+    <a href="https://instagram.com/your_instagram" target="_blank">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+  </div>
 </body>
 </html>
