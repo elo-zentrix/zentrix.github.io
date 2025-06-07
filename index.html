@@ -5,233 +5,170 @@
   <title>Zentrix</title>
   <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    body {
+      background: black;
+      color: #0f0;
+      overflow: hidden;
+    }
+    .loading-screen {
+      position: fixed;
+      width: 100%;
       height: 100%;
       background: black;
-      color: #00ffcc;
-      font-family: monospace;
-      overflow-x: hidden;
-    }/* Loading Screen */
-#loadingScreen {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10000;
-  animation: flickerScreen 1s infinite;
-}
-.loading-bar {
-  width: 80%;
-  height: 10px;
-  background: #111;
-  border: 1px solid #ff0040;
-  overflow: hidden;
-  margin-top: 20px;
-}
-.loading-progress {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ff0040, #00ffcc);
-  animation: loadBar 7s forwards;
-}
-.loading-text {
-  font-size: 1.5rem;
-  color: #ff0040;
-  text-shadow: 0 0 10px red;
-  animation: flicker 0.2s infinite;
-}
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-@keyframes flickerScreen {
-  0%, 100% { background-color: #000; }
-  50% { background-color: #111; }
-}
-@keyframes loadBar {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
-/* Background Malware Code Flicker */
-.code-flicker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-.code-flicker span {
-  position: absolute;
-  font-size: 14px;
-  color: #ff0040;
-  animation: flicker 3s linear forwards, moveUp 3s ease-in-out;
-}
-@keyframes moveUp {
-  0% { transform: translateY(0); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-80px); opacity: 0; }
-}
-
-header {
-  text-align: center;
-  margin-top: 80px;
-  z-index: 2;
-  position: relative;
-}
-
-.glitch-title {
-  font-size: 3.5rem;
-  font-weight: bold;
-  display: inline-block;
-  letter-spacing: 2px;
-  animation: glitch-colors 0.15s infinite;
-}
-
-@keyframes glitch-colors {
-  0% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
-  50% { color: #00ffcc; text-shadow: -2px 0 red, 2px 0 blue; }
-  100% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
-}
-
-.interactive-section {
-  text-align: center;
-  margin: 60px 20px;
-  z-index: 2;
-  position: relative;
-}
-
-.glitch-btn {
-  font-size: 1.2rem;
-  padding: 12px 24px;
-  color: #ff0040;
-  background: transparent;
-  border: 1px solid #ff0040;
-  cursor: pointer;
-  font-family: monospace;
-  transition: 0.3s ease-in-out;
-  animation: glitch-colors 0.15s infinite;
-}
-
-.details-box {
-  max-width: 600px;
-  margin: 30px auto;
-  border: 1px solid #00ffcc;
-  padding: 20px;
-  display: none;
-  background: rgba(0, 0, 0, 0.6);
-  animation: glitch-colors 0.2s infinite;
-}
-
-.contact {
-  text-align: center;
-  margin-top: 100px;
-  z-index: 2;
-  position: relative;
-}
-
-.contact a {
-  font-size: 2rem;
-  margin: 0 20px;
-  color: #00ffcc;
-  display: inline-block;
-  animation: glitch-colors 0.15s infinite;
-}
-
-/* BSOD screen simulation */
-.bsod-overlay {
-  position: fixed;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  background: rgba(0,0,255,0.7);
-  color: white;
-  font-size: 1.1rem;
-  padding: 20px;
-  font-family: Consolas, monospace;
-  z-index: 9999;
-  display: none;
-}
-
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .loading-text {
+      color: red;
+      font-size: 20px;
+      margin-bottom: 10px;
+      animation: flicker 1s infinite;
+    }
+    .loading-bar {
+      width: 80%;
+      height: 20px;
+      background: #222;
+      border: 1px solid red;
+      overflow: hidden;
+      position: relative;
+    }
+    .loading-progress {
+      height: 100%;
+      background: red;
+      animation: load 7s linear forwards;
+    }
+    @keyframes load {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .bsod {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #0000AA;
+      color: white;
+      font-size: 1.2rem;
+      padding: 20px;
+      display: none;
+      z-index: 9998;
+    }
+    .terminal {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 60%;
+      background: black;
+      border: 2px solid red;
+      color: red;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+      z-index: 9997;
+    }
+    .glitch-text {
+      animation: glitch 0.3s infinite;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-1px, 1px); }
+      40% { transform: translate(1px, -1px); }
+      60% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 1px); }
+      100% { transform: translate(0); }
+    }
+    #content {
+      display: none;
+      padding: 20px;
+    }
+    .reveal-box {
+      margin-top: 40px;
+      color: #0f0;
+      font-size: 24px;
+      text-align: center;
+    }
+    .contact-icons {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    .contact-icons a {
+      color: red;
+      font-size: 32px;
+      animation: glitch 0.5s infinite;
+    }
   </style>
-</head><body>
-  <div id="loadingScreen">
-    <div class="loading-text">Injecting Malware...</div>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="loading-text">Loading virus into device...</div>
     <div class="loading-bar">
       <div class="loading-progress"></div>
     </div>
-  </div>  <div class="code-flicker" id="flickerContainer"></div>  <header>
-    <h1 class="glitch-title" id="glitchTitle">Zentrix</h1>
-  </header>  <section class="interactive-section">
-    <h2>Want to know about me?</h2>
-    <button class="glitch-btn" onclick="showDetails()">Click to Reveal</button>
-    <div class="details-box" id="detailsBox">
-      <p><strong>Name:</strong> Akash</p>
-      <p><strong>Field:</strong> Cybersecurity Student</p>
-      <p><strong>Skills:</strong> C++, Cybersecurity, Editing, Reverse Engineering (basic)</p>
+  </div>  <div class="bsod">
+    A problem has been detected and Windows has been shut down to prevent damage...
+    <br/><br/>CRITICAL_PROCESS_DIED<br/><br/>Please wait...
+  </div>  <div class="terminal" id="terminal">
+    <div>> Initializing script...</div>
+    <div>> Establishing backdoor access...</div>
+    <div>> Injecting payload...</div>
+    <div>> Bypassing firewall...</div>
+    <div>> Gathering credentials...</div>
+    <div>> Uploading data to remote server...</div>
+    <div>> Access granted.</div>
+  </div>  <div id="content">
+    <h1 class="glitch-text" style="text-align:center; color:red; font-size:48px;">Zentrix</h1>
+    <div class="reveal-box" id="reveal-name">akash</div>
+    <div class="contact-icons">
+      <a href="https://instagram.com/elo.zentrix" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:elo.zentrix@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
-  </section>  <section class="contact">
-    <a href="mailto:elo.zentrix@gmail.com" target="_blank" title="Gmail">
-      <i class="fas fa-envelope"></i>
-    </a>
-    <a href="https://instagram.com/elo.zentrix" target="_blank" title="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
-  </section>  <div class="bsod-overlay" id="bsod">
-    <p>:(</p>
-    <p>Your device ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you.</p>
-    <p>Stop Code: MALWARE_OVERRUN</p>
-    <p>If this is the first time you've seen this error, just panic.</p>
   </div>  <script>
-    // Show BSOD popup randomly
-    setTimeout(() => {
-      document.getElementById('bsod').style.display = 'block';
-    }, 20000);
+    const loadingScreen = document.querySelector('.loading-screen');
+    const bsod = document.querySelector('.bsod');
+    const terminal = document.getElementById('terminal');
+    const content = document.getElementById('content');
+    const revealName = document.getElementById('reveal-name');
 
-    // Hide loading after 7s
     setTimeout(() => {
-      document.getElementById('loadingScreen').style.display = 'none';
+      loadingScreen.style.display = 'none';
+      bsod.style.display = 'block';
+
+      setTimeout(() => {
+        bsod.style.display = 'none';
+        terminal.style.display = 'block';
+
+        setTimeout(() => {
+          terminal.style.display = 'none';
+          content.style.display = 'block';
+        }, 4000);
+
+      }, 7000);
     }, 7000);
 
-    // Glitch title
-    const glitchTitle = document.getElementById('glitchTitle');
-    const originalText = "Zentrix";
-    const glitchChars = "@#$%&1234567890-=+!~[]{}|<>?/";
+    const names = ["akash", "eloxxn", "Zentrix"];
+    let i = 0;
     setInterval(() => {
-      const glitched = originalText.split('').map(char => {
-        return Math.random() > 0.8 ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : char;
-      }).join('');
-      glitchTitle.textContent = glitched;
-    }, 150);
-
-    // Toggle Details
-    function showDetails() {
-      const box = document.getElementById("detailsBox");
-      box.style.display = box.style.display === "block" ? "none" : "block";
-    }
-
-    // Malware Code Spawner
-    const flickerContainer = document.getElementById("flickerContainer");
-    const malwareSnippets = ["root@mal:~$", "0x4F3C21", "inject_payload()", "[WARNING]", "#exploit", "memory_leak: yes", "0x7f53b4", "kernel panic()", "rm -rf /", "DROP TABLE users;", "unauthorized_access()"];
-
-    function spawnFlicker() {
-      const span = document.createElement("span");
-      span.textContent = malwareSnippets[Math.floor(Math.random() * malwareSnippets.length)];
-      span.style.left = Math.random() * window.innerWidth + "px";
-      span.style.top = Math.random() * window.innerHeight + "px";
-      flickerContainer.appendChild(span);
-      setTimeout(() => span.remove(), 3000);
-    }
-
-    setInterval(spawnFlicker, 200);
+      revealName.textContent = names[i];
+      revealName.classList.toggle("glitch-text");
+      i = (i + 1) % names.length;
+    }, 3000);
   </script></body>
 </html>
