@@ -14,6 +14,8 @@
     }header, section, footer {
   text-align: center;
   padding: 60px 20px;
+  position: relative;
+  z-index: 1;
 }
 
 h1.glitch {
@@ -31,22 +33,23 @@ h1.glitch::after {
   left: 0;
   width: 100%;
   overflow: hidden;
-  color: #0ff;
   background: #0d0d0d;
 }
 
 h1.glitch::before {
   top: -2px;
   left: 2px;
-  text-shadow: -1px 0 red;
+  text-shadow: -2px 0 red;
   animation: glitchTop 2s infinite;
+  color: #00ffea;
 }
 
 h1.glitch::after {
   top: 2px;
   left: -2px;
-  text-shadow: -1px 0 blue;
+  text-shadow: -2px 0 green;
   animation: glitchBottom 2s infinite;
+  color: #00ffea;
 }
 
 @keyframes glitchTop {
@@ -94,6 +97,7 @@ h1.glitch::after {
   width: 90%;
   backdrop-filter: blur(4px);
   border: 1px solid #0ff;
+  text-align: left;
 }
 
 .contact a {
@@ -114,26 +118,44 @@ h1.glitch::after {
   margin-right: 8px;
 }
 
-.matrix {
+.code-flicker {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  background: rgba(0,0,0,0.2);
   pointer-events: none;
   z-index: 0;
+  font-family: monospace;
+  font-size: 12px;
+  color: #0f0;
+  white-space: pre;
+  line-height: 1.2;
+  opacity: 0.1;
+  padding: 10px;
 }
 
   </style>  <!-- Font Awesome -->  <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script></head><body>
-  <canvas class="matrix"></canvas>  <header>
+  <div class="code-flicker" id="codeFlicker"></div>  <header>
     <h1 class="glitch">Zentrix</h1>
   </header>  <section class="fade-in">
     <h2>About Me</h2>
-    <p>Cybersecurity student. Curious about how things work, passionate about reverse engineering, C++, and editing.</p>
+    <p>Hey, I’m Zentrix — a cybersecurity student driven by curiosity. I love figuring out how things tick, whether it's through reverse engineering, C++ coding, or editing. Right now, I'm on a mission to break things (legally) and learn how to build them better.</p>
   </section>  <section class="portfolio fade-in">
     <h2>Portfolio</h2>
     <div class="portfolio-item">
-      <p>No projects yet, but learning every day!</p>
+      <h3>Skills & Interests</h3>
+      <ul>
+        <li>Cybersecurity & Ethical Hacking</li>
+        <li>Reverse Engineering (basic)</li>
+        <li>C++ Programming</li>
+        <li>Editing & Visual Tools</li>
+      </ul>
+    </div>
+    <div class="portfolio-item">
+      <h3>Projects</h3>
+      <p>No public projects yet — building in stealth mode 😎</p>
     </div>
   </section>  <section class="contact fade-in">
     <h2>Contact</h2>
@@ -151,37 +173,18 @@ h1.glitch::after {
         }
       });
     });
-
     document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-  </script>  <!-- Matrix Code Background -->  <script>
-    const canvas = document.querySelector('.matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = "アァイィウエカキクケコサシスセソタチツテトナニヌネノハヒフホマミムメモヤユヨラリルレロワヲン0123456789";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array.from({ length: columns }).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f0';
-      ctx.font = fontSize + 'px monospace';
-
-      drops.forEach((y, i) => {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        const x = i * fontSize;
-        ctx.fillText(text, x, y * fontSize);
-
-        if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      });
-    }
-
-    setInterval(draw, 50);
+  </script>  <!-- Code Flicker Background -->  <script>
+    const flickerElement = document.getElementById("codeFlicker");
+    const randomCode = () => {
+      const chars = "01abcdefx+_{}[];:()$%!&|<>#";
+      let output = "";
+      for (let i = 0; i < 2000; i++) {
+        output += chars[Math.floor(Math.random() * chars.length)];
+        if (i % 80 === 0) output += "\n";
+      }
+      flickerElement.textContent = output;
+    };
+    setInterval(randomCode, 400);
   </script></body>
 </html>
