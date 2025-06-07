@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akash</title>
+  <title>Zentrix</title>
   <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
   <style>
     html, body {
@@ -22,37 +22,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 1000;
 }
+.loading-bar {
+  width: 80%;
+  height: 10px;
+  background: #222;
+  border: 1px solid #00ffcc;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.loading-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffcc, #ff0040);
+  animation: loadBar 7s forwards;
+}
 .loading-text {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #00ffcc;
-  animation: glitch-text-fast 0.15s infinite;
+}
+@keyframes loadBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
-@keyframes glitch-text-fast {
-  0% { color: #ff0040; }
-  33% { color: #00ffcc; }
-  66% { color: #4400ff; }
-  100% { color: #00ffcc; }
-}
-
-/* Parallax Stars */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 200%;
-  height: 200%;
-  background: url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/img/stars.jpg');
-  background-size: cover;
+/* Background Malware Code Flicker */
+.code-flicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 0;
-  animation: stars 200s linear infinite;
 }
-
-@keyframes stars {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-50%, -50%); }
+.code-flicker span {
+  position: absolute;
+  font-size: 14px;
+  color: #ff0040;
+  animation: flicker 3s linear forwards;
+}
+@keyframes flicker {
+  0% { opacity: 0; transform: scale(1) translateY(0); }
+  50% { opacity: 1; transform: scale(1.5) translateY(-10px); color: #00ffcc; }
+  100% { opacity: 0; transform: scale(2) translateY(-50px); }
 }
 
 header {
@@ -122,9 +137,12 @@ header {
   </style>
 </head><body>
   <div id="loadingScreen">
-    <div class="loading-text">Loading Akash...</div>
-  </div>  <header>
-    <h1 class="glitch-title" id="glitchTitle">Akash</h1>
+    <div class="loading-text">Loading Zentrix...</div>
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+  </div>  <div class="code-flicker" id="flickerContainer"></div>  <header>
+    <h1 class="glitch-title" id="glitchTitle">Zentrix</h1>
   </header>  <section class="interactive-section">
     <h2>Want to know about me?</h2>
     <button class="glitch-btn" onclick="showDetails()">Click to Reveal</button>
@@ -141,14 +159,14 @@ header {
       <i class="fab fa-instagram"></i>
     </a>
   </section>  <script>
-    // Remove Loading Screen
-    window.addEventListener('load', () => {
+    // Loading screen delay
+    setTimeout(() => {
       document.getElementById('loadingScreen').style.display = 'none';
-    });
+    }, 7000);
 
-    // Glitching Header Letters
+    // Glitch title
     const glitchTitle = document.getElementById('glitchTitle');
-    const originalText = "Akash";
+    const originalText = "Zentrix";
     const glitchChars = "@#$%&1234567890-=+!~[]{}|<>?/";
 
     setInterval(() => {
@@ -163,5 +181,20 @@ header {
       const box = document.getElementById("detailsBox");
       box.style.display = box.style.display === "block" ? "none" : "block";
     }
+
+    // Flickering Malware Code
+    const flickerContainer = document.getElementById("flickerContainer");
+    const malwareSnippets = ["root@mal:~$", "0x4F3C21", "user:root", "inject()", "xor eax,eax", "[exploit]", "0x7f53b4", "kernel panic", "rm -rf /", "DROP TABLE users;"];
+
+    function spawnFlicker() {
+      const span = document.createElement("span");
+      span.textContent = malwareSnippets[Math.floor(Math.random() * malwareSnippets.length)];
+      span.style.left = Math.random() * window.innerWidth + "px";
+      span.style.top = Math.random() * window.innerHeight + "px";
+      flickerContainer.appendChild(span);
+      setTimeout(() => span.remove(), 3000);
+    }
+
+    setInterval(spawnFlicker, 300);
   </script></body>
 </html>
