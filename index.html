@@ -125,17 +125,9 @@
   </div>  <div class="bsod">
     A problem has been detected and Windows has been shut down to prevent damage...
     <br/><br/>CRITICAL_PROCESS_DIED<br/><br/>Please wait...
-  </div>  <div class="terminal" id="terminal">
-    <div>> Initializing script...</div>
-    <div>> Establishing backdoor access...</div>
-    <div>> Injecting payload...</div>
-    <div>> Bypassing firewall...</div>
-    <div>> Gathering credentials...</div>
-    <div>> Uploading data to remote server...</div>
-    <div>> Access granted.</div>
-  </div>  <div id="content">
+  </div>  <div class="terminal" id="terminal"></div>  <div id="content">
     <h1 class="glitch-text" style="text-align:center; color:red; font-size:48px;">Zentrix</h1>
-    <div class="reveal-box" id="reveal-name">akash</div>
+    <div class="reveal-box">akash</div>
     <div class="contact-icons">
       <a href="https://instagram.com/elo.zentrix" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="mailto:elo.zentrix@gmail.com"><i class="fas fa-envelope"></i></a>
@@ -145,7 +137,25 @@
     const bsod = document.querySelector('.bsod');
     const terminal = document.getElementById('terminal');
     const content = document.getElementById('content');
-    const revealName = document.getElementById('reveal-name');
+
+    function generateFakeCodeLines(n) {
+      const commands = [
+        "[+] Establishing secure shell...",
+        "[*] Brute force login...",
+        "[#] Root access granted.",
+        "[>] Dumping credentials...",
+        "[*] Injecting payload...",
+        "[#] Running exploit chain...",
+        "[+] Kernel panic bypass initiated...",
+        "[#] Connecting to C2 server...",
+        "[*] Executing malware script..."
+      ];
+      let code = "";
+      for (let i = 0; i < n; i++) {
+        code += commands[Math.floor(Math.random() * commands.length)] + "\n";
+      }
+      return code;
+    }
 
     setTimeout(() => {
       loadingScreen.style.display = 'none';
@@ -154,21 +164,14 @@
       setTimeout(() => {
         bsod.style.display = 'none';
         terminal.style.display = 'block';
+        terminal.innerText = generateFakeCodeLines(250);
 
         setTimeout(() => {
           terminal.style.display = 'none';
           content.style.display = 'block';
-        }, 4000);
+        }, 5000);
 
       }, 7000);
     }, 7000);
-
-    const names = ["akash", "eloxxn", "Zentrix"];
-    let i = 0;
-    setInterval(() => {
-      revealName.textContent = names[i];
-      revealName.classList.toggle("glitch-text");
-      i = (i + 1) % names.length;
-    }, 3000);
   </script></body>
 </html>
