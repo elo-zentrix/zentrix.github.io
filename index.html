@@ -1,190 +1,173 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zentrix</title>
+  <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      background-color: #0d0d0d;
-      color: #ffffff;
-      font-family: 'Segoe UI', sans-serif;
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background: black;
+      color: #00ffcc;
+      font-family: monospace;
       overflow-x: hidden;
-    }header, section, footer {
-  text-align: center;
-  padding: 60px 20px;
-  position: relative;
-  z-index: 1;
-}
-
-h1.glitch {
-  font-size: 4rem;
-  font-weight: 900;
-  color: white;
-  position: relative;
-  animation: flicker 3s infinite;
-}
-
-h1.glitch::before,
-h1.glitch::after {
-  content: 'Zentrix';
-  position: absolute;
+    }.dot-map {
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
+  font-size: 4px;
+  line-height: 4px;
+  white-space: pre;
+  color: #005050;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+header {
+  text-align: center;
+  margin-top: 80px;
+  z-index: 1;
+  position: relative;
+}
+
+.glitch-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  display: inline-block;
+  letter-spacing: 2px;
+  animation: glitch-text 3s infinite;
+}
+
+@keyframes glitch-text {
+  0%, 100% { text-shadow: 0 0 2px #00ffcc; }
+  25% { text-shadow: 2px -2px #ff00cc; }
+  50% { text-shadow: -2px 2px #00ffcc; }
+  75% { text-shadow: 1px 1px #ff00cc; }
+}
+
+.interactive-section {
+  text-align: center;
+  margin: 60px 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.glitch-btn {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  color: #00ffcc;
+  background: transparent;
+  border: 1px solid #00ffcc;
+  cursor: pointer;
+  font-family: monospace;
+  position: relative;
   overflow: hidden;
-  background: #0d0d0d;
+  transition: 0.3s ease-in-out;
 }
 
-h1.glitch::before {
-  top: -2px;
-  left: 2px;
-  text-shadow: -2px 0 red;
-  animation: glitchTop 2s infinite;
-  color: #00ffea;
+.glitch-btn span {
+  display: inline-block;
+  animation: glitch-char 2s infinite alternate;
 }
 
-h1.glitch::after {
-  top: 2px;
-  left: -2px;
-  text-shadow: -2px 0 green;
-  animation: glitchBottom 2s infinite;
-  color: #00ffea;
+@keyframes glitch-char {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(2px, -2px); }
+  100% { transform: translate(-1px, 1px); }
 }
 
-@keyframes glitchTop {
-  0%, 100% { clip-path: inset(0 0 90% 0); }
-  50% { clip-path: inset(30% 0 50% 0); }
-}
-
-@keyframes glitchBottom {
-  0%, 100% { clip-path: inset(90% 0 0 0); }
-  50% { clip-path: inset(50% 0 30% 0); }
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  10% { opacity: 0.9; }
-  20% { opacity: 0.95; }
-  30% { opacity: 0.85; }
-  40% { opacity: 1; }
-}
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: none;
-}
-
-.portfolio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.portfolio-item {
-  background: rgba(255, 255, 255, 0.05);
+.details-box {
+  max-width: 600px;
+  margin: 30px auto;
+  border: 1px solid #00ffcc;
   padding: 20px;
-  border-radius: 12px;
-  width: 90%;
-  backdrop-filter: blur(4px);
-  border: 1px solid #0ff;
-  text-align: left;
+  display: none;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.contact {
+  text-align: center;
+  margin-top: 100px;
+  z-index: 1;
+  position: relative;
 }
 
 .contact a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
   font-size: 2rem;
-  transition: 0.3s;
+  margin: 0 20px;
+  color: #00ffcc;
+  transition: transform 0.3s;
+  display: inline-block;
 }
 
 .contact a:hover {
-  color: #00ffff;
   transform: scale(1.2);
 }
 
 .contact i {
-  vertical-align: middle;
-  margin-right: 8px;
+  animation: glitch-char 1.5s infinite alternate;
 }
 
-.code-flicker {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.2);
-  pointer-events: none;
-  z-index: 0;
-  font-family: monospace;
-  font-size: 12px;
-  color: #0f0;
-  white-space: pre;
-  line-height: 1.2;
-  opacity: 0.1;
-  padding: 10px;
-}
+  </style>
+</head><body>
+  <div class="dot-map" id="dotMap"></div>  <header>
+    <h1 class="glitch-title" id="glitchTitle">Zentrix</h1>
+  </header>  <section class="interactive-section">
+    <h2>Want to know about me?</h2>
+    <button class="glitch-btn" onclick="showDetails()" id="glitchButton"></button>
+    <div class="details-box" id="detailsBox">
+      <p><strong>Name:</strong> Zentrix</p>
+      <p><strong>Field:</strong> Cybersecurity Student</p>
+      <p><strong>Skills:</strong> C++, Cybersecurity, Editing, Reverse Engineering (basic)</p>
+    </div>
+  </section>  <section class="contact">
+    <a href="mailto:elo.zentrix@gmail.com" target="_blank" title="Gmail">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://instagram.com/elo.zentrix" target="_blank" title="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </section>  <script>
+    // Glitching Header Letters
+    const glitchTitle = document.getElementById('glitchTitle');
+    const originalText = "Zentrix";
+    const glitchChars = "@#$%&1234567890-=+!~[]{}|<>?/";
 
-  </style>  <!-- Font Awesome -->  <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script></head><body>
-  <div class="code-flicker" id="codeFlicker"></div>  <header>
-    <h1 class="glitch">Zentrix</h1>
-  </header>  <section class="fade-in">
-    <h2>About Me</h2>
-    <p>Hey, I’m Zentrix — a cybersecurity student driven by curiosity. I love figuring out how things tick, whether it's through reverse engineering, C++ coding, or editing. Right now, I'm on a mission to break things (legally) and learn how to build them better.</p>
-  </section>  <section class="portfolio fade-in">
-    <h2>Portfolio</h2>
-    <div class="portfolio-item">
-      <h3>Skills & Interests</h3>
-      <ul>
-        <li>Cybersecurity & Ethical Hacking</li>
-        <li>Reverse Engineering (basic)</li>
-        <li>C++ Programming</li>
-        <li>Editing & Visual Tools</li>
-      </ul>
-    </div>
-    <div class="portfolio-item">
-      <h3>Projects</h3>
-      <p>No public projects yet — building in stealth mode 😎</p>
-    </div>
-  </section>  <section class="contact fade-in">
-    <h2>Contact</h2>
-    <a href="mailto:elo.zentrix@gmail.com" target="_blank">
-      <i class="fas fa-envelope"></i> Gmail
-    </a>
-    <a href="https://instagram.com/elo.zentrix" target="_blank">
-      <i class="fab fa-instagram"></i> Instagram
-    </a>
-  </section>  <!-- Fade-in on scroll -->  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-  </script>  <!-- Code Flicker Background -->  <script>
-    const flickerElement = document.getElementById("codeFlicker");
-    const randomCode = () => {
-      const chars = "01abcdefx+_{}[];:()$%!&|<>#";
-      let output = "";
-      for (let i = 0; i < 2000; i++) {
-        output += chars[Math.floor(Math.random() * chars.length)];
-        if (i % 80 === 0) output += "\n";
+    setInterval(() => {
+      const glitched = originalText.split('').map(char => {
+        return Math.random() > 0.8 ? glitchChars[Math.floor(Math.random() * glitchChars.length)] : char;
+      }).join('');
+      glitchTitle.textContent = glitched;
+    }, 150);
+
+    // Glitch Button Characters
+    const button = document.getElementById('glitchButton');
+    const buttonText = "Click to Reveal";
+    button.innerHTML = buttonText.split('').map(letter => `<span>${letter}</span>`).join('');
+
+    // Toggle Details
+    function showDetails() {
+      const box = document.getElementById("detailsBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    // Dot World Map
+    const dotMap = document.getElementById('dotMap');
+    const mapWidth = Math.floor(window.innerWidth / 4);
+    const mapHeight = Math.floor(window.innerHeight / 4);
+    let dots = '';
+    for (let y = 0; y < mapHeight; y++) {
+      for (let x = 0; x < mapWidth; x++) {
+        const isLand = Math.random() > 0.6; // change to world-map logic if needed
+        dots += isLand ? '.' : ' ';
       }
-      flickerElement.textContent = output;
-    };
-    setInterval(randomCode, 400);
+      dots += '\n';
+    }
+    dotMap.textContent = dots;
   </script></body>
 </html>
