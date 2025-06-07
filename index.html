@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zentrix</title>
@@ -122,56 +121,57 @@
     <div class="loading-bar">
       <div class="loading-progress"></div>
     </div>
-  </div>  <div class="bsod">
+  </div>
+  <div class="bsod">
     A problem has been detected and Windows has been shut down to prevent damage...
     <br/><br/>CRITICAL_PROCESS_DIED<br/><br/>Please wait...
-  </div>  <div class="terminal" id="terminal"></div>  <div id="content">
+  </div>
+  <div class="terminal" id="terminal"></div>
+  <div id="content">
     <h1 class="glitch-text" style="text-align:center; color:red; font-size:48px;">Zentrix</h1>
     <div class="reveal-box">akash</div>
     <div class="contact-icons">
       <a href="https://instagram.com/elo.zentrix" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="mailto:elo.zentrix@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
-  </div>  <script>
+  </div>
+  <script>
     const loadingScreen = document.querySelector('.loading-screen');
     const bsod = document.querySelector('.bsod');
     const terminal = document.getElementById('terminal');
-    const content = document.getElementById('content');
+    const content = document.getElementById('content');function generateFakeCodeLines(n) {
+  const commands = [
+    "[+] Establishing secure shell...",
+    "[*] Brute force login...",
+    "[#] Root access granted.",
+    "[>] Dumping credentials...",
+    "[*] Injecting payload...",
+    "[#] Running exploit chain...",
+    "[+] Kernel panic bypass initiated...",
+    "[#] Connecting to C2 server...",
+    "[*] Executing malware script..."
+  ];
+  let code = "";
+  for (let i = 0; i < n; i++) {
+    code += commands[Math.floor(Math.random() * commands.length)] + "\n";
+  }
+  return code;
+}
 
-    function generateFakeCodeLines(n) {
-      const commands = [
-        "[+] Establishing secure shell...",
-        "[*] Brute force login...",
-        "[#] Root access granted.",
-        "[>] Dumping credentials...",
-        "[*] Injecting payload...",
-        "[#] Running exploit chain...",
-        "[+] Kernel panic bypass initiated...",
-        "[#] Connecting to C2 server...",
-        "[*] Executing malware script..."
-      ];
-      let code = "";
-      for (let i = 0; i < n; i++) {
-        code += commands[Math.floor(Math.random() * commands.length)] + "\n";
-      }
-      return code;
-    }
+setTimeout(() => {
+  loadingScreen.style.display = 'none';
+  bsod.style.display = 'block';
+  terminal.style.display = 'block';
+  terminal.innerText = generateFakeCodeLines(250);
 
-    setTimeout(() => {
-      loadingScreen.style.display = 'none';
-      bsod.style.display = 'block';
+  setTimeout(() => {
+    bsod.style.display = 'none';
+    terminal.style.display = 'none';
+    content.style.display = 'block';
+  }, 5000); // terminal + bsod duration
 
-      setTimeout(() => {
-        bsod.style.display = 'none';
-        terminal.style.display = 'block';
-        terminal.innerText = generateFakeCodeLines(250);
+}, 7000); // after loading
 
-        setTimeout(() => {
-          terminal.style.display = 'none';
-          content.style.display = 'block';
-        }, 5000);
-
-      }, 7000);
-    }, 7000);
-  </script></body>
+  </script>
+</body>
 </html>
