@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,101 +10,178 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+      overflow-x: hidden;
+    }header, section, footer {
+  text-align: center;
+  padding: 60px 20px;
+}
 
-    h1.glitch {
-      font-size: 4rem;
-      font-weight: 900;
-      color: white;
-      position: relative;
-      animation: flicker 3s infinite;
-    }
+h1.glitch {
+  font-size: 4rem;
+  font-weight: 900;
+  color: white;
+  position: relative;
+  animation: flicker 3s infinite;
+}
 
-    h1.glitch::before,
-    h1.glitch::after {
-      content: 'Zentrix';
-      position: absolute;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-      color: #0ff;
-      background: #0d0d0d;
-    }
+h1.glitch::before,
+h1.glitch::after {
+  content: 'Zentrix';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #0ff;
+  background: #0d0d0d;
+}
 
-    h1.glitch::before {
-      top: -2px;
-      left: 2px;
-      text-shadow: -1px 0 red;
-      animation: glitchTop 2s infinite;
-    }
+h1.glitch::before {
+  top: -2px;
+  left: 2px;
+  text-shadow: -1px 0 red;
+  animation: glitchTop 2s infinite;
+}
 
-    h1.glitch::after {
-      top: 2px;
-      left: -2px;
-      text-shadow: -1px 0 blue;
-      animation: glitchBottom 2s infinite;
-    }
+h1.glitch::after {
+  top: 2px;
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  animation: glitchBottom 2s infinite;
+}
 
-    @keyframes glitchTop {
-      0%, 100% { clip-path: inset(0 0 90% 0); }
-      50% { clip-path: inset(30% 0 50% 0); }
-    }
+@keyframes glitchTop {
+  0%, 100% { clip-path: inset(0 0 90% 0); }
+  50% { clip-path: inset(30% 0 50% 0); }
+}
 
-    @keyframes glitchBottom {
-      0%, 100% { clip-path: inset(90% 0 0 0); }
-      50% { clip-path: inset(50% 0 30% 0); }
-    }
+@keyframes glitchBottom {
+  0%, 100% { clip-path: inset(90% 0 0 0); }
+  50% { clip-path: inset(50% 0 30% 0); }
+}
 
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      10% { opacity: 0.9; }
-      20% { opacity: 0.95; }
-      30% { opacity: 0.85; }
-      40% { opacity: 1; }
-    }
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  10% { opacity: 0.9; }
+  20% { opacity: 0.95; }
+  30% { opacity: 0.85; }
+  40% { opacity: 1; }
+}
 
-    .contact {
-      margin-top: 30px;
-    }
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
 
-    .contact a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 2rem;
-      transition: 0.3s;
-    }
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
 
-    .contact a:hover {
-      color: #00ffff;
-      transform: scale(1.2);
-    }
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-    .contact i {
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-  </style>
-<script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script>
-</head>
+.portfolio-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  backdrop-filter: blur(4px);
+  border: 1px solid #0ff;
+}
 
-<body>
-  <h1 class="glitch">Zentrix</h1>
+.contact a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 2rem;
+  transition: 0.3s;
+}
 
-  <div class="contact">
-    <a href="mailto:yourmail@gmail.com" target="_blank">
+.contact a:hover {
+  color: #00ffff;
+  transform: scale(1.2);
+}
+
+.contact i {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+  </style>  <!-- Font Awesome -->  <script src="https://kit.fontawesome.com/3fab7fdf6c.js" crossorigin="anonymous"></script></head><body>
+  <canvas class="matrix"></canvas>  <header>
+    <h1 class="glitch">Zentrix</h1>
+  </header>  <section class="fade-in">
+    <h2>About Me</h2>
+    <p>Cybersecurity student. Curious about how things work, passionate about reverse engineering, C++, and editing.</p>
+  </section>  <section class="portfolio fade-in">
+    <h2>Portfolio</h2>
+    <div class="portfolio-item">
+      <p>No projects yet, but learning every day!</p>
+    </div>
+  </section>  <section class="contact fade-in">
+    <h2>Contact</h2>
+    <a href="mailto:elo.zentrix@gmail.com" target="_blank">
       <i class="fas fa-envelope"></i> Gmail
     </a>
-    <a href="https://instagram.com/your_instagram" target="_blank">
+    <a href="https://instagram.com/elo.zentrix" target="_blank">
       <i class="fab fa-instagram"></i> Instagram
     </a>
-  </div>
-</body>
+  </section>  <!-- Fade-in on scroll -->  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+  </script>  <!-- Matrix Code Background -->  <script>
+    const canvas = document.querySelector('.matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "アァイィウエカキクケコサシスセソタチツテトナニヌネノハヒフホマミムメモヤユヨラリルレロワヲン0123456789";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      drops.forEach((y, i) => {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const x = i * fontSize;
+        ctx.fillText(text, x, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      });
+    }
+
+    setInterval(draw, 50);
+  </script></body>
 </html>
