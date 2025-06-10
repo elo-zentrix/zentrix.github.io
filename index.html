@@ -75,7 +75,7 @@
 
     @keyframes glitch-colors {
       0% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
-      50% { color: #00ffcc; text-shadow: -2px 0 red, 2px 0 blue; }
+      50% { color: #00ffcc; text-shadow: -2px 0 red, 2px 0 red; }
       100% { color: #00ffcc; text-shadow: 2px 0 red, -2px 0 blue; }
     }
 
@@ -301,7 +301,7 @@
     // Fake code for the animated background
     const codeBackground = document.getElementById('codeBackground');
     let codeContent = '';
-    const codeLines = 1000;
+    const codeLines = you 500;
     const codeSample = [
       "mov eax, 1", "int 0x80", "jmp $", "xor eax, eax", "push ebx",
       "call 0x080484", "lea esi, [ebp-4]", "cmp eax, 0", "jne 0x004", "add al, 0x90"
